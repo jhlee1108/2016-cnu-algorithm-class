@@ -1,4 +1,4 @@
-#include <stdio.h>
+/*#include <stdio.h>
 
 void insertion_sort(int *a, int n)
 {
@@ -34,4 +34,4 @@ int main()
 	insertion_sort(a,6);
 	print_array(a,6);
 	return 0;
-}
+}*/

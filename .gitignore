@@ -254,3 +254,5 @@ paket-files/
 *.sln
 *.vcxproj
 *.vcxproj.filters
+
+*.txt

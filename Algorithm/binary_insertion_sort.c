@@ -1,4 +1,4 @@
-#include <stdio.h>
+/*#include <stdio.h>
 
 int binary_search(int *a, int n, int key)
 {
@@ -50,24 +50,26 @@ void move_array(int *a, int i, int j)
 void insertion_sort(int *a, int n)
 {
 	int insert,j,key;
+
 	for(j = 1; j < n; j++)
 	{
 		key = a[j];
 		insert = binary_search(a,j,key);
 		move_array(a,insert,j);
 		a[insert] = key;
-		
 	}
 }
 
 void print_array(int *a, int n)
 {
 	int i = 0;
+
 	while(i < n)
 	{
 		printf("%d ",a[i]);
 		i = i + 1;
 	}
+
 	printf("\n");
 }
 
@@ -76,20 +78,21 @@ void write_array(int *a, int n)
 	int i = 1;
 	FILE *fp = fopen("data02_insertion.txt","w");
 	fprintf(fp,"%d",a[0]);
+
 	while(i < n)
 	{
 		fprintf(fp,",%d ",a[i]);
 		i = i + 1;
 	}
+
 	fclose(fp);
 }
 
 int main()
 {
-	FILE *fp;
+	FILE *fp = fopen("data02.txt","r");
 	int a[1000];
 	int n = 0;
-	fp = fopen("data02.txt","r");
 
 	while(0 < fscanf(fp,"%d,",&a[n]))
 	{
@@ -101,5 +104,6 @@ int main()
 	print_array(a,n);
 	write_array(a,n);
 	fclose(fp);
+
 	return 0;
-}
+}*/

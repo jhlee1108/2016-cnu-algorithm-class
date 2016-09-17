@@ -1,4 +1,7 @@
-#include <stdio.h>
+/*#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_SIZE 100000
 
 void insertion_sort(int *a, int n)
 {
@@ -17,19 +20,6 @@ void insertion_sort(int *a, int n)
 	}
 }
 
-void print_array(int *a, int n)
-{
-	int i = 0;
-
-	while(i < n)
-	{
-		printf("%d ",a[i]);
-		i = i + 1;
-	}
-
-	printf("\n");
-}
-
 void write_array(int *a, int n)
 {
 	int i = 1;
@@ -38,7 +28,7 @@ void write_array(int *a, int n)
 
 	while(i < n)
 	{
-		fprintf(fp,",%d ",a[i]);
+		fprintf(fp,",%d",a[i]);
 		i = i + 1;
 	}
 
@@ -47,8 +37,8 @@ void write_array(int *a, int n)
 
 int main()
 {
-	FILE *fp = fopen("data02.txt","r");
-	int a[1000];
+	FILE *fp = fopen("hw02_10man.txt","r");
+	int *a = (int*)malloc(sizeof(int) * MAX_SIZE);
 	int n = 0;
 
 	while(0 < fscanf(fp,"%d,",&a[n]))
@@ -56,11 +46,10 @@ int main()
 		n++;
 	}
 
-	print_array(a,n);
 	insertion_sort(a,n);
-	print_array(a,n);
 	write_array(a,n);
 	fclose(fp);
+	free(a);
 
 	return 0;
-}
+}*/

@@ -1,55 +1,55 @@
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-#define MAX_SIZE 1000000
+#define MAX_SIZE 100000
 
 void merge(int *a, int n)
 {
 	int *temp = (int*)malloc(sizeof(int) * n);
 	int mid = n / 2;
+	int array_index = 0;
 	int i = 0;
 	int j = mid;
-	int t = 0;
-	int k;
+	int t;
 
-	for(k = 0; k < n; k++)
+	for(t = 0; t < n; t++)
 	{
-		temp[k] = a[k];
+		temp[t] = a[t];
 	}
 
 	while((i < mid) && (j < n))
 	{
 		if(temp[i] < temp[j])
 		{
-			a[t++] = temp[i++];
+			a[array_index++] = temp[i++];
 		}
 		else
 		{
-			a[t++] = temp[j++];
+			a[array_index++] = temp[j++];
 		}
 	}
 
 	if(i == mid)
 	{
-		for(k = j; k < n; k++)
+		for(t = j; t < n; t++)
 		{
-			a[t++] = temp[k];
+			a[array_index++] = temp[t];
 		}
 	}
 
 	else
 	{
-		for(k = i; k < mid; k++)
+		for(t = i; t < mid; t++)
 		{
-			a[t++] = temp[k];
+			a[array_index++] = temp[t];
 		}
 	}
 
 	free(temp);
 }
 
-void merge_sort(int *a, int n)
+void merge_sort(int *a, int n, int *count)
 {
 	int mid = n / 2;
 
@@ -58,15 +58,16 @@ void merge_sort(int *a, int n)
 		return;
 	}
 
-	merge_sort(a,mid);
-	merge_sort(a + mid,n - mid);
+	merge_sort(a,mid, count);
+	merge_sort(a + mid,n - mid, count);
 	merge(a,n);
+	*count += 1;
 }
 
 void write_array(int *a, int n)
 {
 	int i = 1;
-	FILE *fp = fopen("data02_merge.txt","w");
+	FILE *fp = fopen("hw01_01_201200737_merge.txt","w");
 	fprintf(fp,"%d",a[0]);
 
 	while(i < n)
@@ -80,9 +81,10 @@ void write_array(int *a, int n)
 
 int main()
 {
-	FILE *fp = fopen("hw02_100man.txt","r");
+	FILE *fp = fopen("data02.txt","r");
 	int *a = (int*)malloc(sizeof(int) * MAX_SIZE);
 	int n = 0;
+	int count = 0;
 	time_t start_time = 0, end_time = 0;
 
 	printf("Reading input file...\n");
@@ -93,10 +95,11 @@ int main()
 
 	printf("Start merge sort\n");
 	start_time = clock();
-	merge_sort(a,n);
+	merge_sort(a, n, &count);
 	end_time = clock();
 	printf("Finish\n");
 	printf("%d ms\n", end_time - start_time);
+	printf("Call merge() %d times\n", count);
 
 	printf("Writing array...\n");
 	write_array(a,n);
@@ -104,4 +107,4 @@ int main()
 
 
 	return 0;
-}
+}*/

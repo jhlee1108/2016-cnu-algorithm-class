@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define MAX_SIZE 100000
+#define MAX_SIZE 100000000
 
-void merge(int *a, int n)
+void merge(int *a, int n, int *count)
 {
 	int *temp = (int*)malloc(sizeof(int) * n);
 	int one_third = n / 3;
@@ -14,6 +14,8 @@ void merge(int *a, int n)
 	int j = one_third;
 	int k = two_third;
 	int t;
+
+	*count += 1;
 
 	for(t = 0; t < n; t++)
 	{
@@ -161,8 +163,8 @@ void merge_sort(int *a, int n, int *count)
 	merge_sort(a, one_third, count);
 	merge_sort(a + one_third, two_third - one_third, count);
 	merge_sort(a + two_third, n - two_third, count);
-	merge(a,n);
-	*count += 1;
+	merge(a, n, count);
+	
 }
 
 void write_array(int *a, int n)

@@ -1,8 +1,8 @@
-/*#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-#define MAX_SIZE 100000
+#define MAX_SIZE 100000000
 
 void merge(int *a, int n)
 {
@@ -107,4 +107,4 @@ int main()
 
 
 	return 0;
-}*/
+}

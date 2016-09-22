@@ -64,7 +64,7 @@ void merge_sort(int *a, int n, int *count)
 	*count += 1;
 }
 
-void write_array(int *a, int n)
+void write_array(int *a, int n, int count)
 {
 	int i = 1;
 	FILE *fp = fopen("hw01_01_201200737_merge.txt","w");
@@ -75,6 +75,8 @@ void write_array(int *a, int n)
 		fprintf(fp,",%d",a[i]);
 		i = i + 1;
 	}
+
+	fprintf(fp,",%d",count);
 
 	fclose(fp);
 }
@@ -102,7 +104,7 @@ int main()
 	printf("Call merge() %d times\n", count);
 
 	printf("Writing array...\n");
-	write_array(a,n);
+	write_array(a, n, count);
 	fclose(fp);
 
 

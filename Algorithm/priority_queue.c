@@ -100,7 +100,7 @@ void print_queue(priority_queue *queue)
 
 	for(i = 0; i < queue -> size; i++)
 	{
-		printf("%d, %s, index : %d\n", queue -> nodes[i].key, queue -> nodes[i].value, i);
+		printf("%3d, %20s, index : %d\n", queue -> nodes[i].key, queue -> nodes[i].value, i);
 	}
 }
 
@@ -166,6 +166,14 @@ void extract_max(priority_queue *queue)
 
 void increase_key(priority_queue *queue, int i, int new_key)
 {
+	if((i >= queue -> size) || (i < 0))
+	{
+		system("cls");
+		printf("**** select 0~%d ****\n\n", (queue -> size) - 1);
+
+		return;
+	}
+
 	system("cls");
 	printf("**** increase_key ****\n\n");
 
@@ -185,6 +193,14 @@ void increase_key(priority_queue *queue, int i, int new_key)
 
 void delete_node(priority_queue *queue, int i)
 {
+	if((i >= queue -> size) || (i < 0))
+	{
+		system("cls");
+		printf("**** select 0~%d ****\n\n", (queue -> size) - 1);
+
+		return;
+	}
+
 	system("cls");
 	printf("**** delete_node ****\n\n");
 
@@ -218,9 +234,11 @@ int main()
 	init_queue(queue);
 
 	read_file(queue, fp);
+	fclose(fp);
 
 	build_max_heap(queue);
 
+	printf("**** select your job ****\n\n");
 	while(state != '6')
 	{
 		print_queue(queue);
@@ -248,7 +266,7 @@ int main()
 			break;
 
 		case '4':
-			printf("node : ");
+			printf("select node_index : ");
 			scanf("%d", &node_index);
 			printf("new_key : ");
 			scanf("%d", &temp_key);
@@ -257,7 +275,7 @@ int main()
 			break;
 
 		case '5':
-			printf("node : ");
+			printf("select node_index : ");
 			scanf("%d", &node_index);
 
 			delete_node(queue, node_index);
@@ -274,7 +292,7 @@ int main()
 	}
 
 	free(queue -> nodes);
-	fclose(fp);
+	free(queue);
 
 	return 0;
 }

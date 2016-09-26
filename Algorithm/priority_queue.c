@@ -214,7 +214,7 @@ node *make_node()
 	node *temp_node = (node *)malloc(sizeof(node));
 
 	printf("value : ");
-	scanf("%s", temp_node -> value);
+	scanf("%19s", temp_node -> value);
 
 	printf("key : ");
 	scanf("%d", &temp_node -> key);

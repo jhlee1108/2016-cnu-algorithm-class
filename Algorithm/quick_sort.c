@@ -1,7 +1,8 @@
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
-#define MAX_SIZE 1000000
+#define MAX_SIZE 10000000
 
 void swap(int *a, int *b)
 {
@@ -59,9 +60,10 @@ void write_array(int *a, int n)
 
 int main()
 {
-	FILE *fp = fopen("data04.txt","r");
+	FILE *fp = fopen("hw02_1000man.txt","r");
 	int *a = (int*)malloc(sizeof(int) * MAX_SIZE);
 	int n = 0;
+	time_t start_time = 0, end_time = 0;
 
 	printf("Reading input file...\n");
 	while(0 < fscanf(fp,"%d,",&a[n]))
@@ -70,8 +72,11 @@ int main()
 	}
 
 	printf("Start quick sort\n");
+	start_time = clock();
 	quick_sort(a, 0, n);
+	end_time = clock();
 	printf("Finish\n");
+	printf("%d ms\n", end_time - start_time);
 
 	printf("Writing array...\n");
 	write_array(a, n);
@@ -79,4 +84,4 @@ int main()
 
 
 	return 0;
-}
+}*/

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define MAX_SIZE 10000000
+#define MAX_SIZE 1000000
 
 void swap(int *a, int *b)
 {
@@ -37,7 +37,6 @@ int random(int *a, int p, int r)
 	i = (rand() % (r - p - 1)) + p;
 	j = (rand() % (r - p - 1)) + p;
 	k = (rand() % (r - p - 1)) + p;
-	//printf("random value = %d, %d, %d\n", a[i], a[j], a[k]);
 	
 	return mid(a, i, j, k);
 }
@@ -67,10 +66,9 @@ int randomized_partition(int *a, int p, int r)
 {
 	int i;
 
-	if((r - p - 1) > 50)
+	if((r - p - 1) > 2)
 	{
 		i = random(a, p, r);
-		//printf("mid = %d\n", a[i]);
 		swap(&a[i], &a[r - 1]);
 	}
 
@@ -106,10 +104,9 @@ void write_array(int *a, int n)
 
 int main()
 {
-	FILE *fp = fopen("hw02_1000man.txt","r");
+	FILE *fp = fopen("data04.txt","r");
 	int *a = (int*)malloc(sizeof(int) * MAX_SIZE);
 	int n = 0;
-	time_t start_time = 0, end_time = 0;
 
 	printf("Reading input file...\n");
 	while(0 < fscanf(fp,"%d,",&a[n]))
@@ -118,16 +115,13 @@ int main()
 	}
 
 	printf("Start quick sort\n");
-	start_time = clock();
 	randomized_quick_sort(a, 0, n);
-	end_time = clock();
 	printf("Finish\n");
-	printf("%d ms\n", end_time - start_time);
 
 	printf("Writing array...\n");
 	write_array(a, n);
 	fclose(fp);
-
+	free(a);
 
 	return 0;
 }

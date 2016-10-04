@@ -209,7 +209,7 @@ int main()
 	printf("Writing array...\n");
 	write_array(a, n, count);
 	fclose(fp);
-
+	free(a);
 
 	return 0;
 }*/

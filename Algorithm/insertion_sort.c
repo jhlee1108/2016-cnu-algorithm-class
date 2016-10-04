@@ -59,7 +59,7 @@ int main()
 	printf("Writing array...\n");
 	write_array(a,n);
 	fclose(fp);
-
+	free(a);
 
 	return 0;
 }*/

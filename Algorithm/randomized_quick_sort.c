@@ -1,4 +1,4 @@
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
@@ -124,4 +124,4 @@ int main()
 	free(a);
 
 	return 0;
-}
+}*/

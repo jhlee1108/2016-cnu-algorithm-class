@@ -1,4 +1,4 @@
-/*#include <stdio.h>
+#include <stdio.h>
 
 float calculate_angle(int hour, int minute)
 {
@@ -43,4 +43,4 @@ int main()
 	printf("hour = %d, minute = %d, angle = %.2f\n", hour, minute, angle);
 
 	return 0;
-}*/
+}

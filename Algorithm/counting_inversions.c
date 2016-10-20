@@ -1,4 +1,4 @@
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdlib.h>
 
 #define MAX_SIZE 1000000
@@ -88,11 +88,10 @@ int main()
 	}
 
 	sort_and_count(a, n, &count);
-	print_array(a, n);
 	printf("count = %d\n", count);
 
 	fclose(fp);
 	free(a);
 
 	return 0;
-}
+}*/

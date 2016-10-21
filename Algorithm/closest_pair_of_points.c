@@ -17,53 +17,46 @@ double euclidean_distance(point *p1, point *p2)
 	return dist;
 }
 
-void swap(point *a, point *b)
+int compare_x(const void *a, const void *b)
 {
-	point temp = *a;
-	*a = *b;
-	*b = temp;
-}
+	point *p1 = (point *)a;
+	point *p2 = (point *)b;
 
-void sort_by_x(point *point_list, int n)
-{
-	int i, j, min;
-
-	for(i = 0; i < (n - 1); i++)
+	if(p1 -> x > p2 -> x)
 	{
-		min = i;
-
-		for(j = i + 1; j < n; j++)
-		{
-			if(point_list[j].x < point_list[min].x)
-			{
-				min = j;
-			}
-		}
-
-		swap(&point_list[i], &point_list[min]);
+		return 1;
 	}
 
-}
-
-void sort_by_y(point *point_list, int n)
-{
-	int i, j, min;
-
-	for(i = 0; i < (n - 1); i++)
+	else if(p1 -> x < p2 -> x)
 	{
-		min = i;
-
-		for(j = i + 1; j < n; j++)
-		{
-			if(point_list[j].y < point_list[min].y)
-			{
-				min = j;
-			}
-		}
-
-		swap(&point_list[i], &point_list[min]);
+		return -1;
 	}
 
+	else
+	{
+		return 0;
+	}
+}
+
+int compare_y(const void *a, const void *b)
+{
+	point *p1 = (point *)a;
+	point *p2 = (point *)b;
+
+	if(p1 -> y > p2 -> y)
+	{
+		return 1;
+	}
+
+	else if(p1 -> y < p2 -> y)
+	{
+		return -1;
+	}
+
+	else
+	{
+		return 0;
+	}
 }
 
 double brute_force(point *point_list, int n)
@@ -111,7 +104,7 @@ double closest_pair(point *point_list, int n)
 		}
 	}
 
-	sort_by_y(remaining_points, remaining_points_size);
+	qsort(remaining_points, remaining_points_size, sizeof(point), compare_y);
 	
 	for(i = 0; i < (remaining_points_size - 1); i++)
 	{
@@ -137,16 +130,15 @@ int main()
 	point *point_list = (point *)malloc(sizeof(point) * MAX_SIZE);
 	int n = 0;
 	double min_dist;
-	int i;
 
 	while(0 < fscanf(fp,"%lf,%lf",&point_list[n].x, &point_list[n].y))
 	{
 		n++;
 	}
 
-	sort_by_x(point_list, n);
+	qsort(point_list, n, sizeof(point), compare_x);
 	min_dist = closest_pair(point_list, n);
-	printf("%.3f\n", min_dist);
+	printf("%.3lf\n", min_dist);
 
 	fclose(fp);
 	free(point_list);

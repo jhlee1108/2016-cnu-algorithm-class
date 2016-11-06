@@ -1,4 +1,4 @@
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 
@@ -92,7 +92,7 @@ double closest_pair(point *point_list, int n)
 	point *remaining_points = (point *)malloc(sizeof(point) * n);
 	int remaining_points_size = 0;
 	int i,j;
-	double l = (point_list[mid - 1].x - point_list[mid].x) / 2;
+	double l = (point_list[mid - 1].x + point_list[mid].x) / 2;
 
 	if(n <= 3)
 	{
@@ -152,4 +152,4 @@ int main()
 	free(point_list);
 
 	return 0;
-}
+}*/

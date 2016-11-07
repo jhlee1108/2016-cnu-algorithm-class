@@ -1,4 +1,4 @@
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 
@@ -144,4 +144,4 @@ int main()
 	free(point_list);
 
 	return 0;
-}
+}*/

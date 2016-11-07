@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define MAX_SIZE 10000
+#define MAX_SIZE 1000000
 #define min(x,y) ((x) < (y) ? (x) : (y))
 
 typedef struct point{
@@ -85,7 +85,7 @@ double closest_pair(point *point_list, int n)
 	point *remaining_points = (point *)malloc(sizeof(point) * n);
 	int remaining_points_size = 0;
 	int i,j;
-	double l = (point_list[mid - 1].x - point_list[mid].x) / 2;
+	double l = (point_list[mid - 1].x + point_list[mid].x) / 2;
 
 	if(n <= 3)
 	{

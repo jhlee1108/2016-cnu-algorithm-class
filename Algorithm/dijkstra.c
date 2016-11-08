@@ -80,24 +80,12 @@ void decrease_distance(priority_queue *queue, int i, int new_distance)
 
 void find_shortest_path(int (*graph)[SIZE], int start_node)
 {
-	int w[SIZE][SIZE];
-	int i,j;
+	int i;
 	node temp;
 	int s_size = 0;
 	node *s = (node *)malloc(sizeof(node) * SIZE);
 	priority_queue *queue = (priority_queue *)malloc(sizeof(priority_queue));
 	init_queue(queue);
-
-	for(i = 0; i < SIZE; i++){
-		for(j = 0; j < SIZE; j++){
-			if(graph[i][j] != 0)
-				w[i][j] = graph[i][j];
-			else if(i == j)
-				w[i][j] = 0;
-			else
-				w[i][j] = MAX_VALUE;
-		}
-	}
 
 	for(i = 0; i < SIZE; i++){
 		queue -> nodes[i].key = i;
@@ -119,9 +107,9 @@ void find_shortest_path(int (*graph)[SIZE], int start_node)
 		for(i = 0; i < queue -> size; i++){
 			printf("Q[%d] : d[%c] = %d", i, queue -> nodes[i].key + 65, queue -> nodes[i].distance);
 
-			if(queue -> nodes[i].distance > temp.distance + w[temp.key][queue -> nodes[i].key]){
-				printf(" -> d[%c] = %d", queue -> nodes[i].key + 65, temp.distance + w[temp.key][queue -> nodes[i].key]);
-				decrease_distance(queue, i, temp.distance + w[temp.key][queue -> nodes[i].key]);
+			if(queue -> nodes[i].distance > temp.distance + graph[temp.key][queue -> nodes[i].key]){
+				printf(" -> d[%c] = %d", queue -> nodes[i].key + 65, temp.distance + graph[temp.key][queue -> nodes[i].key]);
+				decrease_distance(queue, i, temp.distance + graph[temp.key][queue -> nodes[i].key]);
 			}
 
 			printf("\n");
@@ -138,11 +126,11 @@ void find_shortest_path(int (*graph)[SIZE], int start_node)
 
 int main()
 {
-	int graph[SIZE][SIZE] = {	{0, 10, 3, 0, 0},
-								{0, 0, 1, 2, 0},
-								{0, 4, 0, 8, 2},
-								{0, 0, 0, 0, 7},
-								{0, 0, 0, 9, 0}};
+	int graph[SIZE][SIZE] = {	{			0,			10,			3,	MAX_VALUE,	MAX_VALUE},
+								{	MAX_VALUE,			0,			1,			2,	MAX_VALUE},
+								{	MAX_VALUE,			4,			0,			8,			2},
+								{	MAX_VALUE,	MAX_VALUE,	MAX_VALUE,			0,			7},
+								{	MAX_VALUE,	MAX_VALUE,	MAX_VALUE,			9,			0}};
 
 	printf("dijkstra algorithm\n\n");
 	find_shortest_path(graph, 0);

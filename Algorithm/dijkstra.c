@@ -1,4 +1,4 @@
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdlib.h>
 
 #define SIZE 5
@@ -136,4 +136,4 @@ int main()
 	find_shortest_path(graph, 0);
 
 	return 0;
-}
+}*/

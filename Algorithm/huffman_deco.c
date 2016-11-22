@@ -1,4 +1,4 @@
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdlib.h>
 
 #define NUMBER_OF_LETTERS 27
@@ -92,4 +92,4 @@ int main()
 	free_tree(root);
 
 	return 0;
-}
+}*/

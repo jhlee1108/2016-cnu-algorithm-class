@@ -1,4 +1,4 @@
-/*#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 
@@ -22,18 +22,15 @@ int compare_x(const void *a, const void *b)
 	point *p1 = (point *)a;
 	point *p2 = (point *)b;
 
-	if(p1 -> x > p2 -> x)
-	{
+	if(p1 -> x > p2 -> x) {
 		return 1;
 	}
 
-	else if(p1 -> x < p2 -> x)
-	{
+	else if(p1 -> x < p2 -> x) {
 		return -1;
 	}
 
-	else
-	{
+	else {
 		return 0;
 	}
 }
@@ -43,18 +40,15 @@ int compare_y(const void *a, const void *b)
 	point *p1 = (point *)a;
 	point *p2 = (point *)b;
 
-	if(p1 -> y > p2 -> y)
-	{
+	if(p1 -> y > p2 -> y) {
 		return 1;
 	}
 
-	else if(p1 -> y < p2 -> y)
-	{
+	else if(p1 -> y < p2 -> y) {
 		return -1;
 	}
 
-	else
-	{
+	else {
 		return 0;
 	}
 }
@@ -64,12 +58,9 @@ double brute_force(point *point_list, int n)
 	int i,j;
 	double min_dist = euclidean_distance(&point_list[0], &point_list[1]);
 
-	for(i = 0; i < (n - 1); i++)
-	{
-		for(j = i + 1; j < n; j++)
-		{
-			if(euclidean_distance(&point_list[i], &point_list[j]) < min_dist)
-			{
+	for(i = 0; i < (n - 1); i++) {
+		for(j = i + 1; j < n; j++) {
+			if(euclidean_distance(&point_list[i], &point_list[j]) < min_dist) {
 				min_dist = euclidean_distance(&point_list[i], &point_list[j]);
 			}
 		}
@@ -87,8 +78,7 @@ double closest_pair(point *point_list, int n)
 	int i,j;
 	double l = (point_list[mid - 1].x + point_list[mid].x) / 2;
 
-	if(n <= 3)
-	{
+	if(n <= 3) {
 		return brute_force(point_list, n);
 	}
 
@@ -96,22 +86,17 @@ double closest_pair(point *point_list, int n)
 	dist2 = closest_pair(point_list + mid, n - mid);
 	min_dist = min(dist1, dist2);
 
-	for(i = 0; i < n; i++)
-	{
-		if((point_list[i].x >= (l - min_dist)) && (point_list[i].x <= (l + min_dist)))
-		{
+	for(i = 0; i < n; i++) {
+		if((point_list[i].x >= (l - min_dist)) && (point_list[i].x <= (l + min_dist))) {
 			remaining_points[remaining_points_size++] = point_list[i];
 		}
 	}
 
 	qsort(remaining_points, remaining_points_size, sizeof(point), compare_y);
 	
-	for(i = 0; i < (remaining_points_size - 1); i++)
-	{
-		for(j = i + 1; j < remaining_points_size; j++)
-		{
-			if(remaining_points[j].y - remaining_points[i].y >= min_dist)
-			{
+	for(i = 0; i < (remaining_points_size - 1); i++) {
+		for(j = i + 1; j < remaining_points_size; j++) {
+			if(remaining_points[j].y - remaining_points[i].y >= min_dist) {
 				break;
 			}
 
@@ -131,8 +116,7 @@ int main()
 	int n = 0;
 	double min_dist;
 
-	while(0 < fscanf(fp,"%lf,%lf",&point_list[n].x, &point_list[n].y))
-	{
+	while(0 < fscanf(fp,"%lf,%lf",&point_list[n].x, &point_list[n].y)) {
 		n++;
 	}
 
@@ -144,4 +128,4 @@ int main()
 	free(point_list);
 
 	return 0;
-}*/
+}

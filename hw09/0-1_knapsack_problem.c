@@ -16,12 +16,18 @@ void create_table(int table[][MAX_BAG_SIZE], int item_size, int bag_size, item *
 
 	for(i = 0; i <= item_size; i++) {
 		for(j = 0; j <= bag_size; j++) {
-			if(i == 0)
+			if(i == 0) {
 				table[i][j] = 0;
-			else if(items[i].weight > j)
+			}
+
+			else if(items[i].weight > j) {
 				table[i][j] = table[i - 1][j];
-			else
+			}
+
+			else {
 				table[i][j] = MAX(table[i - 1][j], items[i].value + table[i - 1][j - items[i].weight]);
+			}
+
 			printf("%5d", table[i][j]);
 		}
 		printf("\n");
@@ -39,10 +45,14 @@ void find_item(int table[][MAX_BAG_SIZE],int item_size,int bag_size,item *items)
 	printf("max : %d\n", table[item_size][bag_size]);
 
 	while(i > 0 && j > 0) {
-		if(items[i].weight > j) 
+		if(items[i].weight > j) {
 			i--;
-		else if(table[i - 1][j] > items[i].value + table[i - 1][j - items[i].weight])
+		}
+
+		else if(table[i - 1][j] > items[i].value + table[i - 1][j - items[i].weight]) {
 			i--;
+		}
+
 		else {
 			item_num[n++] = i;
 			j = j - items[i].weight;
@@ -51,8 +61,9 @@ void find_item(int table[][MAX_BAG_SIZE],int item_size,int bag_size,item *items)
 	}
 
 	printf("item :");
-	for(i = n - 1; i >= 0; i--)
+	for(i = n - 1; i >= 0; i--) {
 		printf(" %d", item_num[i]);
+	}
 	printf("\n");
 }
 
@@ -66,10 +77,13 @@ int main()
 
 	printf("bag_size(0~50) : ");
 	scanf("%d", &bag_size);
-	if(bag_size > 50)
+	if(bag_size > 50) {
 		bag_size = 50;
-	if(bag_size < 0)
+	}
+
+	if(bag_size < 0) {
 		bag_size = 0;
+	}
 
 	while(fscanf(fp, "%d,%d,%d", &i, &v, &w) != EOF) {
 		items[i].value = v;

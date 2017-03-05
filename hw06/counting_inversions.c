@@ -1,4 +1,4 @@
-/*#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 #define MAX_SIZE 1000000
@@ -12,36 +12,29 @@ void merge_and_count(int *a, int n, int *count)
 	int j = mid;
 	int t;
 
-	for(t = 0; t < n; t++)
-	{
+	for(t = 0; t < n; t++) {
 		temp[t] = a[t];
 	}
 
-	while((i < mid) && (j < n))
-	{
-		if(temp[i] < temp[j])
-		{
+	while((i < mid) && (j < n)) {
+		if(temp[i] < temp[j]) {
 			a[array_index++] = temp[i++];
 		}
-		else
-		{
+
+		else {
 			a[array_index++] = temp[j++];
 			*count += (mid - i);
 		}
 	}
 
-	if(i == mid)
-	{
-		for(t = j; t < n; t++)
-		{
+	if(i == mid) {
+		for(t = j; t < n; t++) {
 			a[array_index++] = temp[t];
 		}
 	}
 
-	else
-	{
-		for(t = i; t < mid; t++)
-		{
+	else {
+		for(t = i; t < mid; t++) {
 			a[array_index++] = temp[t];
 		}
 	}
@@ -53,8 +46,7 @@ void sort_and_count(int *a, int n, int *count)
 {
 	int mid = n / 2;
 
-	if(n <= 1)
-	{
+	if(n <= 1) {
 		return;
 	}
 
@@ -67,8 +59,7 @@ void print_array(int *a, int n)
 {
 	int i;
 
-	for(i = 0; i < n; i++)
-	{
+	for(i = 0; i < n; i++) {
 		printf("%d ", a[i]);
 	}
 
@@ -82,8 +73,7 @@ int main()
 	int n = 0;
 	int count = 0;
 
-	while(0 < fscanf(fp,"%d,",&a[n]))
-	{
+	while(0 < fscanf(fp,"%d,",&a[n])) {
 		n++;
 	}
 
@@ -94,4 +84,4 @@ int main()
 	free(a);
 
 	return 0;
-}*/
+}

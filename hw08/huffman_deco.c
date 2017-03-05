@@ -1,9 +1,9 @@
-/*#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 #define NUMBER_OF_LETTERS 27
 
-typedef struct node{
+typedef struct node {
 	char letter;
 	struct node *left;
 	struct node *right;
@@ -21,38 +21,49 @@ node *new_node()
 
 void make_huffman_tree(node *root, char letter, char *enco)
 {
-	if(enco[0] == '\0' || enco[0] == '\n'){
+	if(enco[0] == '\0' || enco[0] == '\n') {
 		root -> letter = letter;
 		return;
 	}
 
-	if(enco[0] == '0'){
-		if(root -> left == NULL)
+	if(enco[0] == '0') {
+		if(root -> left == NULL) {
 			root -> left = new_node();
+		}
+
 		make_huffman_tree(root -> left, letter, enco + 1);
 	}
 
-	if(enco[0] == '1'){
-		if(root -> right == NULL)
+	if(enco[0] == '1') {
+		if(root -> right == NULL) {
 			root -> right = new_node();
+		}
+
 		make_huffman_tree(root -> right, letter, enco + 1);
 	}
 }
 
 int is_leaf_node(node *n)
 {
-	if((n -> left == NULL) && (n -> right == NULL))
+	if((n -> left == NULL) && (n -> right == NULL)) {
 		return 1;
-	else
+	}
+
+	else {
 		return 0;
+	}
 }
 
 void free_tree(node *root)
 {
-	if(root -> left != NULL)
+	if(root -> left != NULL) {
 		free_tree(root -> left);
-	if(root -> right != NULL)
+	}
+
+	if(root -> right != NULL) {
 		free_tree(root -> right);
+	}
+
 	free(root);
 }
 
@@ -65,7 +76,7 @@ int main()
 	node *root = new_node();
 	node *n;
 
-	while(fscanf(fp, "%c,", &letter) != EOF){
+	while(fscanf(fp, "%c,", &letter) != EOF) {
 		fgets(enco, sizeof(enco), fp);
 		make_huffman_tree(root, letter, enco);
 	}
@@ -74,14 +85,17 @@ int main()
 
 	n = root;
 	fp = fopen("data10_encoded.txt" ,"r");
-	write_fp = fopen("hw08_01_201200737_decoded.txt", "w");
-	while(fscanf(fp, "%c", &letter) != EOF){
-		if(letter == '0')
+	write_fp = fopen("data10_decoded.txt", "w");
+	while(fscanf(fp, "%c", &letter) != EOF) {
+		if(letter == '0') {
 			n = n -> left;
-		else
-			n = n -> right;
+		}
 
-		if(is_leaf_node(n)){
+		else {
+			n = n -> right;
+		}
+
+		if(is_leaf_node(n)) {
 			fprintf(write_fp, "%c", n -> letter);
 			n = root;
 		}
@@ -92,4 +106,4 @@ int main()
 	free_tree(root);
 
 	return 0;
-}*/
+}

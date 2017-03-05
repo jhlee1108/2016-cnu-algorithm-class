@@ -1,15 +1,15 @@
-/*#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
 
 #define SIZE 9
 
-typedef struct node{
+typedef struct node {
 	char vertex;
 	int weight;
 } node;
 
-typedef struct priority_queue{
+typedef struct priority_queue {
 	node *nodes;
 	int size;
 } priority_queue;
@@ -27,13 +27,15 @@ void min_heapify(priority_queue *queue, int i)
 	int right = i * 2 + 2;
 	int smallest = i;
 
-	if((queue -> nodes[left].weight < queue -> nodes[smallest].weight) && (left < queue -> size))
+	if((queue -> nodes[left].weight < queue -> nodes[smallest].weight) && (left < queue -> size)) {
 		smallest = left;
+	}
 
-	if((queue -> nodes[right].weight < queue -> nodes[smallest].weight) && (right < queue -> size))
+	if((queue -> nodes[right].weight < queue -> nodes[smallest].weight) && (right < queue -> size)) {
 		smallest = right;
+	}
 
-	if(smallest != i){
+	if(smallest != i) {
 		swap(&queue -> nodes[smallest], &queue -> nodes[i]);
 		min_heapify(queue, smallest);
 	}
@@ -43,13 +45,14 @@ void build_min_heap(priority_queue *queue)
 {
 	int i;
 
-	for(i = (queue -> size - 1) / 2; i >= 0; i--)
+	for(i = (queue -> size - 1) / 2; i >= 0; i--) {
 		min_heapify(queue, i);
+	}
 }
 
 node extract_min(priority_queue *queue)
 {
-	if(queue -> size > 0){
+	if(queue -> size > 0) {
 		node min = queue -> nodes[0];
 		queue -> nodes[0] = queue -> nodes[queue -> size - 1];
 		queue ->size -= 1;
@@ -76,23 +79,26 @@ void find_mst(int (*graph)[SIZE], int start_node)
 
 	init_queue(queue);
 
-	for(i = 0; i < SIZE; i++){
+	for(i = 0; i < SIZE; i++) {
 		queue -> nodes[i].vertex = i + 97;
-		if(i == start_node)
+		if(i == start_node) {
 			queue -> nodes[i].weight = 0;
-		else
+		}
+
+		else {
 			queue -> nodes[i].weight = INT_MAX;
+		}
 	}
 
 	build_min_heap(queue);
 	
-	while(queue -> size > 0){
+	while(queue -> size > 0) {
 		u = extract_min(queue);
 		sum_weight += u.weight;
 		printf("w<%c,%c> = %d\n", parent_node[u.vertex - 97].vertex, u.vertex, u.weight);
 
-		for(i = 0; i < queue -> size; i++){
-			if(queue -> nodes[i].weight > graph[u.vertex - 97][queue -> nodes[i].vertex - 97]){
+		for(i = 0; i < queue -> size; i++) {
+			if(queue -> nodes[i].weight > graph[u.vertex - 97][queue -> nodes[i].vertex - 97]) {
 				queue -> nodes[i].weight = graph[u.vertex - 97][queue -> nodes[i].vertex - 97];
 				parent_node[queue -> nodes[i].vertex - 97] = u;
 			}
@@ -122,4 +128,4 @@ int main()
 
 	find_mst(graph, 0);
 	return 0;
-}*/
+}

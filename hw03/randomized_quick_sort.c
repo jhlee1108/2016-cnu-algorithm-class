@@ -1,4 +1,4 @@
-/*#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
@@ -13,23 +13,20 @@ void swap(int *a, int *b)
 
 int mid(int *a, int i, int j, int k)
 {
-	if(((a[i] >= a[j]) && (a[i] < a[k])) || ((a[i] < a[j]) && (a[i] >= a[k])))
-	{
+	if(((a[i] >= a[j]) && (a[i] < a[k])) || ((a[i] < a[j]) && (a[i] >= a[k]))) {
 		return i;
 	}
 
-	else if(((a[j] >= a[i]) && (a[j] < a[k])) || ((a[j] < a[i]) && (a[j] >= a[k])))
-	{
+	else if(((a[j] >= a[i]) && (a[j] < a[k])) || ((a[j] < a[i]) && (a[j] >= a[k]))) {
 		return j;
 	}
 
-	else
-	{
+	else {
 		return k;
 	}
 }
 
-int random(int *a, int p, int r)
+int randomized(int *a, int p, int r)
 {
 	int i, j, k;
 	
@@ -47,10 +44,8 @@ int partition(int *a, int p, int r)
 	int j;
 	int x = a[r - 1];
 
-	for(j = p; j < r - 1; j++)
-	{
-		if(a[j] <= x)
-		{
+	for(j = p; j < r - 1; j++) {
+		if(a[j] <= x) {
 			i++;
 			swap(&a[i], &a[j]);
 		}
@@ -66,9 +61,8 @@ int randomized_partition(int *a, int p, int r)
 {
 	int i;
 
-	if((r - p - 1) > 2)
-	{
-		i = random(a, p, r);
+	if((r - p - 1) > 2) {
+		i = randomized(a, p, r);
 		swap(&a[i], &a[r - 1]);
 	}
 
@@ -79,8 +73,7 @@ void randomized_quick_sort(int *a, int p, int r)
 {
 	int q;
 
-	if(p < r)
-	{
+	if(p < r) {
 		q = randomized_partition(a, p, r);
 		randomized_quick_sort(a, p, q);
 		randomized_quick_sort(a, q + 1, r);
@@ -90,11 +83,10 @@ void randomized_quick_sort(int *a, int p, int r)
 void write_array(int *a, int n)
 {
 	int i = 1;
-	FILE *fp = fopen("hw03_01_201200737_quickRandom.txt","w");
+	FILE *fp = fopen("randomized_quick_sort_result.txt","w");
 	fprintf(fp,"%d",a[0]);
 
-	while(i < n)
-	{
+	while(i < n) {
 		fprintf(fp,",%d",a[i]);
 		i = i + 1;
 	}
@@ -109,8 +101,7 @@ int main()
 	int n = 0;
 
 	printf("Reading input file...\n");
-	while(0 < fscanf(fp,"%d,",&a[n]))
-	{
+	while(0 < fscanf(fp,"%d,",&a[n])) {
 		n++;
 	}
 
@@ -124,4 +115,4 @@ int main()
 	free(a);
 
 	return 0;
-}*/
+}

@@ -1,4 +1,4 @@
-/*#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 #define SIZE 5
@@ -33,13 +33,15 @@ void min_heapify(priority_queue *queue, int i)
 	int right = 2 * i + 2;
 	int smallest = i;
 
-	if((left < queue -> size) && (queue -> nodes[i].distance > queue -> nodes[left].distance))
+	if((left < queue -> size) && (queue -> nodes[i].distance > queue -> nodes[left].distance)) {
 		smallest = left;
+	}
 
-	if((right < queue -> size) && (queue -> nodes[smallest].distance > queue -> nodes[right].distance))
+	if((right < queue -> size) && (queue -> nodes[smallest].distance > queue -> nodes[right].distance)) {
 		smallest = right;
+	}
 
-	if(smallest != i){
+	if(smallest != i) {
 		swap(&queue -> nodes[i], &queue -> nodes[smallest]);
 		min_heapify(queue, smallest);
 	}
@@ -49,13 +51,14 @@ void build_min_heap(priority_queue *queue)
 {
 	int i;
 
-	for(i = (queue -> size - 1) / 2; i >= 0; i--)
+	for(i = (queue -> size - 1) / 2; i >= 0; i--) {
 		min_heapify(queue, i);
+	}
 }
 
 node extract_min(priority_queue *queue)
 {
-	if(queue -> size > 0){
+	if(queue -> size > 0) {
 		node min = queue -> nodes[0];
 		queue -> nodes[0] = queue -> nodes[queue -> size - 1];
 		queue ->size -= 1;
@@ -67,11 +70,13 @@ node extract_min(priority_queue *queue)
 
 void decrease_distance(priority_queue *queue, int i, int new_distance)
 {
-	if((i < queue -> size) && (queue -> nodes[i].distance > new_distance)){
+	if((i < queue -> size) && (queue -> nodes[i].distance > new_distance)) {
 		queue -> nodes[i].distance = new_distance;
-		while(i > 0){
-			if(queue -> nodes[(i - 1) / 2].distance <= new_distance)
+		while(i > 0) {
+			if(queue -> nodes[(i - 1) / 2].distance <= new_distance) {
 				break;
+			}
+
 			swap(&queue -> nodes[(i - 1) / 2], &queue -> nodes[i]);
 			i = (i - 1) / 2;
 		}
@@ -87,27 +92,30 @@ void find_shortest_path(int (*graph)[SIZE], int start_node)
 	priority_queue *queue = (priority_queue *)malloc(sizeof(priority_queue));
 	init_queue(queue);
 
-	for(i = 0; i < SIZE; i++){
+	for(i = 0; i < SIZE; i++) {
 		queue -> nodes[i].key = i;
-		if(i == start_node)
+		if(i == start_node) {
 			queue -> nodes[i].distance = 0;
-		else
+		}
+
+		else {
 			queue -> nodes[i].distance = MAX_VALUE;
+		}
 	}
 
 	build_min_heap(queue);
 
-	while(queue -> size > 0){
+	while(queue -> size > 0) {
 		temp = extract_min(queue);
 		s[s_size] = temp;
 		printf("--------------------------------------------\n");
 		printf("S[%d] : d[%c] = %d\n", s_size, temp.key + 65, temp.distance);
 		printf("--------------------------------------------\n");
 
-		for(i = 0; i < queue -> size; i++){
+		for(i = 0; i < queue -> size; i++) {
 			printf("Q[%d] : d[%c] = %d", i, queue -> nodes[i].key + 65, queue -> nodes[i].distance);
 
-			if(queue -> nodes[i].distance > temp.distance + graph[temp.key][queue -> nodes[i].key]){
+			if(queue -> nodes[i].distance > temp.distance + graph[temp.key][queue -> nodes[i].key]) {
 				printf(" -> d[%c] = %d", queue -> nodes[i].key + 65, temp.distance + graph[temp.key][queue -> nodes[i].key]);
 				decrease_distance(queue, i, temp.distance + graph[temp.key][queue -> nodes[i].key]);
 			}
@@ -136,4 +144,4 @@ int main()
 	find_shortest_path(graph, 0);
 
 	return 0;
-}*/
+}

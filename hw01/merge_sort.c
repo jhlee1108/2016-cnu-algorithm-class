@@ -1,4 +1,4 @@
-/*#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
@@ -13,35 +13,28 @@ void merge(int *a, int n)
 	int j = mid;
 	int t;
 
-	for(t = 0; t < n; t++)
-	{
+	for(t = 0; t < n; t++) {
 		temp[t] = a[t];
 	}
 
-	while((i < mid) && (j < n))
-	{
-		if(temp[i] < temp[j])
-		{
+	while((i < mid) && (j < n)) {
+		if(temp[i] < temp[j]) {
 			a[array_index++] = temp[i++];
 		}
-		else
-		{
+
+		else {
 			a[array_index++] = temp[j++];
 		}
 	}
 
-	if(i == mid)
-	{
-		for(t = j; t < n; t++)
-		{
+	if(i == mid) {
+		for(t = j; t < n; t++) {
 			a[array_index++] = temp[t];
 		}
 	}
 
-	else
-	{
-		for(t = i; t < mid; t++)
-		{
+	else {
+		for(t = i; t < mid; t++) {
 			a[array_index++] = temp[t];
 		}
 	}
@@ -53,8 +46,7 @@ void merge_sort(int *a, int n, int *count)
 {
 	int mid = n / 2;
 
-	if(n <= 1)
-	{
+	if(n <= 1) {
 		return;
 	}
 
@@ -67,16 +59,15 @@ void merge_sort(int *a, int n, int *count)
 void write_array(int *a, int n, int count)
 {
 	int i = 1;
-	FILE *fp = fopen("hw01_01_201200737_merge.txt","w");
+	FILE *fp = fopen("merge_sort_result.txt","w");
 	fprintf(fp,"%d",a[0]);
 
-	while(i < n)
-	{
+	while(i < n) {
 		fprintf(fp,",%d",a[i]);
 		i = i + 1;
 	}
 
-	fprintf(fp,",%d",count);
+	fprintf(fp,"\nmerge count = %d",count);
 
 	fclose(fp);
 }
@@ -90,8 +81,7 @@ int main()
 	time_t start_time = 0, end_time = 0;
 
 	printf("Reading input file...\n");
-	while(0 < fscanf(fp,"%d,",&a[n]))
-	{
+	while(0 < fscanf(fp,"%d,",&a[n])) {
 		n++;
 	}
 
@@ -100,7 +90,7 @@ int main()
 	merge_sort(a, n, &count);
 	end_time = clock();
 	printf("Finish\n");
-	printf("%d ms\n", end_time - start_time);
+	printf("%ld ms\n", end_time - start_time);
 	printf("Call merge() %d times\n", count);
 
 	printf("Writing array...\n");
@@ -109,4 +99,4 @@ int main()
 	free(a);
 
 	return 0;
-}*/
+}

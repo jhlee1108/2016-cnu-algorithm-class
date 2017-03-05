@@ -1,4 +1,4 @@
-/*#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
@@ -9,27 +9,22 @@ int binary_search(int *a, int n, int key)
 {
 	int i,j,m;
 
-	if(a[0] > key)
-	{
+	if(a[0] > key) {
 		return 0;
 	}
 
-	else if((a[0] <= key) && (key < a[n - 1]))
-	{
+	else if((a[0] <= key) && (key < a[n - 1])) {
 		i = 0;
 		j = n;
 
-		while((i + 1) != j)
-		{
+		while((i + 1) != j) {
 			m = (i + j) / 2;
 
-			if(a[m] <= key)
-			{
+			if(a[m] <= key) {
 				i = m;
 			}
 
-			else
-			{
+			else {
 				j = m;
 			}
 		}
@@ -37,8 +32,7 @@ int binary_search(int *a, int n, int key)
 		return j;
 	}
 
-	else
-	{
+	else {
 		return n;
 	}
 }
@@ -47,8 +41,7 @@ void insertion_sort(int *a, int n)
 {
 	int insert,j,key;
 
-	for(j = 1; j < n; j++)
-	{
+	for(j = 1; j < n; j++) {
 		key = a[j];
 		insert = binary_search(a, j, key);
 		memmove(a + insert + 1, a + insert, sizeof(int) * (j - insert));
@@ -59,11 +52,10 @@ void insertion_sort(int *a, int n)
 void write_array(int *a, int n)
 {
 	int i = 1;
-	FILE *fp = fopen("hw01_01_201200737_binary_insertion.txt","w");
+	FILE *fp = fopen("binary_insertion_sort_result.txt","w");
 	fprintf(fp,"%d",a[0]);
 
-	while(i < n)
-	{
+	while(i < n) {
 		fprintf(fp,",%d",a[i]);
 		i = i + 1;
 	}
@@ -79,8 +71,7 @@ int main()
 	time_t start_time = 0, end_time = 0;
 
 	printf("Reading input file...\n");
-	while(0 < fscanf(fp,"%d,",&a[n]))
-	{
+	while(0 < fscanf(fp,"%d,",&a[n])) {
 		n++;
 	}
 
@@ -89,7 +80,7 @@ int main()
 	insertion_sort(a,n);
 	end_time = clock();
 	printf("Finish\n");
-	printf("%d ms\n", end_time - start_time);
+	printf("%ld ms\n", end_time - start_time);
 
 	printf("Writing array...\n");
 	write_array(a,n);
@@ -97,4 +88,4 @@ int main()
 	free(a);
 
 	return 0;
-}*/
+}

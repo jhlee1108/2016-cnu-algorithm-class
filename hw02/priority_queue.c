@@ -1,4 +1,4 @@
-/*#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <conio.h>
@@ -48,18 +48,15 @@ void max_heapify(priority_queue *queue, int i)
 	int right = 2 * i + 2;
 	int largest = i;
 
-	if((left < queue -> size) && (queue -> nodes[left].key > queue -> nodes[i].key))
-	{
+	if((left < queue -> size) && (queue -> nodes[left].key > queue -> nodes[i].key)) {
 		largest = left;
 	}
 
-	if((right < queue -> size) && (queue -> nodes[right].key > queue -> nodes[largest].key))
-	{
+	if((right < queue -> size) && (queue -> nodes[right].key > queue -> nodes[largest].key)) {
 		largest = right;
 	}
 
-	if(largest != i)
-	{
+	if(largest != i) {
 		swap(&queue -> nodes[i], &queue -> nodes[largest]);
 		max_heapify(queue, largest);
 	}
@@ -69,8 +66,7 @@ void build_max_heap(priority_queue *queue)
 {
 	int i;
 
-	for(i = (queue -> size - 1) / 2; i >= 0; i--)
-	{
+	for(i = (queue -> size - 1) / 2; i >= 0; i--) {
 		max_heapify(queue,i);
 	}
 }
@@ -80,11 +76,9 @@ void read_file(priority_queue *queue, FILE *fp)
 	char ch = 'a';
 	int n = 0;
 
-	while(ch != EOF)
-	{
+	while(ch != EOF) {
 		fscanf(fp,"%d, ",&queue -> nodes[queue -> size].key);
-		while((ch = fgetc(fp)) != 10 && ch != EOF)
-		{
+		while((ch = fgetc(fp)) != 10 && ch != EOF) {
 			queue -> nodes[queue -> size].value[n++] = ch;
 		}
 
@@ -98,8 +92,7 @@ void print_queue(priority_queue *queue)
 {
 	int i;
 
-	for(i = 0; i < queue -> size; i++)
-	{
+	for(i = 0; i < queue -> size; i++) {
 		printf("%3d, %20s, index : %d\n", queue -> nodes[i].key, queue -> nodes[i].value, i);
 	}
 }
@@ -107,8 +100,7 @@ void print_queue(priority_queue *queue)
 void reverse_max_heapify(priority_queue *queue, int i)
 {
 	int parent_index = (i - 1) / 2;
-	if((queue -> nodes[i].key > queue -> nodes[parent_index].key) && (i != 0))
-	{
+	if((queue -> nodes[i].key > queue -> nodes[parent_index].key) && (i != 0)) {
 		swap(&queue -> nodes[i], &queue -> nodes[parent_index]);
 		reverse_max_heapify(queue, parent_index);
 	}
@@ -137,8 +129,7 @@ node *get_max(priority_queue *queue)
 
 	system("cls");
 
-	if(queue -> size == 0)
-	{
+	if(queue -> size == 0) {
 		printf("**** queue is empty ****\n\n");
 		return NULL;
 	}
@@ -152,8 +143,7 @@ void extract_max(priority_queue *queue)
 {
 	system("cls");
 
-	if(queue -> size == 0)
-	{
+	if(queue -> size == 0) {
 		printf("**** queue is empty ****\n\n");
 		return;
 	}
@@ -166,8 +156,7 @@ void extract_max(priority_queue *queue)
 
 void increase_key(priority_queue *queue, int i, int new_key)
 {
-	if((i >= queue -> size) || (i < 0))
-	{
+	if((i >= queue -> size) || (i < 0)) {
 		system("cls");
 		printf("**** select 0~%d ****\n\n", (queue -> size) - 1);
 
@@ -177,14 +166,12 @@ void increase_key(priority_queue *queue, int i, int new_key)
 	system("cls");
 	printf("**** increase_key ****\n\n");
 
-	if(queue -> nodes[i].key < new_key)
-	{
+	if(queue -> nodes[i].key < new_key) {
 		queue -> nodes[i].key = new_key;
 		reverse_max_heapify(queue, i);
 	}
 
-	else
-	{
+	else {
 		queue -> nodes[i].key = new_key;
 		max_heapify(queue, i);
 	}
@@ -193,8 +180,7 @@ void increase_key(priority_queue *queue, int i, int new_key)
 
 void delete_node(priority_queue *queue, int i)
 {
-	if((i >= queue -> size) || (i < 0))
-	{
+	if((i >= queue -> size) || (i < 0)) {
 		system("cls");
 		printf("**** select 0~%d ****\n\n", (queue -> size) - 1);
 
@@ -239,8 +225,7 @@ int main()
 	build_max_heap(queue);
 
 	printf("**** select your job ****\n\n");
-	while(state != '6')
-	{
+	while(state != '6') {
 		print_queue(queue);
 		printf("-----------------------------------------------\n");
 		printf("1. insert	2. max		3. extract_max\n");
@@ -248,8 +233,7 @@ int main()
 		printf("-----------------------------------------------\n");
 		state = getch();
 
-		switch(state)
-		{
+		switch(state) {
 		case '1':
 			temp_node = make_node();
 			insert(queue, temp_node);
@@ -295,4 +279,4 @@ int main()
 	free(queue);
 
 	return 0;
-}*/
+}
